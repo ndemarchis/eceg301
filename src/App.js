@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import LandingScreen from './comps/LandingScreen';
+import DataDisplay from './comps/DataDisplay';
+
+import { useState } from 'react-dom';
 
 function App() {
+
+  const [dataGotten, setDataGotten] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LandingScreen />
+      <DataDisplay />
     </div>
   );
 }
