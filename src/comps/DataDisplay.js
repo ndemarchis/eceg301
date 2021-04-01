@@ -1,9 +1,8 @@
 
-
-const DataDisplay = () => {
+const DataDisplay = (props) => {
     return (
         <div>
-
+            
         </div>
     )
 }
