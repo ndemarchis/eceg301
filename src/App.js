@@ -6,17 +6,13 @@ import { useState } from 'react';
 
 function App() {
 
-  const [dataGotten, setDataGotten] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [APICalled, setAPICalled] = useState(false);
 
   return (
     <div className="App">
-      {dataGotten}
-      <LandingScreen 
-        setDataGotten = {setDataGotten}
-      />
-      <DataDisplay 
-        dataGotten = {dataGotten}
-      />
+      {!formSubmitted && <LandingScreen setFormSubmitted = {setFormSubmitted} />}
+      {formSubmitted && <DataDisplay dataGotten = {formSubmitted} />}
     </div>
   );
 }
