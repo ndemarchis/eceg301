@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextField, InputLabel, Select, MenuItem, Button } from '@material-ui/core'
+import { TextField, InputLabel, Select, MenuItem, Button, Card, CardContent, CardActions, Typography } from '@material-ui/core'
 import DateFnsUtils from "@date-io/date-fns"; // choose your lib
 import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 
@@ -11,41 +11,35 @@ const LandingScreen = (props) => {
     const [duration, setDuration] = React.useState(0);
 
     return (
-        <div style={{
-          // position: "relative"
+        <div className = "landingCardWrapper" style={{
+          alignItems: "center",
+          margin: "auto"
         }}>
-          <div 
-            style={{
-              width: "20vw",
-              height: "40vh",
-              // position: "absolute", 
-              // top: "50%", 
-              // left: "50%", 
-              // transform: "translate(-50%, -50%)"
-            }}
-          >
+          <Card variant="outlined" raised="true">
             <form onSubmit={(e) => {
               e.preventDefault();
               props.setFormSubmitted(true);
+              props.setFormData({date: selectedDate, duration: duration})
             }}>
-                <LocalizationProvider dateAdapter={DateFnsUtils}>
+              <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                Sample Title
+              </Typography>
+                <LocalizationProvider dateAdapter={DateFnsUtils} >
                     <DateTimePicker
-                        renderInput={(props) => <TextField {...props} />}
+                        renderInput={(props) => <TextField {...props} style={{width: "100%"}} />}
                         value={selectedDate}
                         onChange={(date) => handleDateChange(date)}
                     />
                 </LocalizationProvider>
-              <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-                Data format
-              </InputLabel>
               <Select
                   id="demo-simple-select-outlined"
-                  label="Class Duration"
                   value={duration}
                   onChange={(event) => {setDuration(event.target.value)}}
                   displayEmpty
                   style = {{
-                    padding: "5px"
+                    padding: "5px",
+                    width: "100%",
                   }}
                 >
                   <MenuItem value={0.5}>30 minutes</MenuItem>
@@ -53,13 +47,20 @@ const LandingScreen = (props) => {
                   <MenuItem value={2}>2 hours</MenuItem>
                   <MenuItem value={4}>4 hours</MenuItem>
                 </Select>
+                <InputLabel shrink>
+                  Class Duration
+                </InputLabel>
               <br />
-              <Button variant="contained" color="primary" type='submit' className="locSubmitButton">
+              </CardContent>
+              <CardActions>
+              <Button 
+                color="primary" type='submit' className="locSubmitButton"
+                >
                 Submit
               </Button>
-            {/* </View> */}
+              </CardActions>
             </form>
-          </div>
+            </Card>
         </div>
     );
 }

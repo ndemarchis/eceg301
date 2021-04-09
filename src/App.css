@@ -1,0 +1,21 @@
+div.App {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(2,0,36);
+    background: linear-gradient(22deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(35,146,185,1) 100%);
+}
+
+div.landingCardWrapper {
+    height: 40vh;
+    width: 400px;
+}
+
+@media only screen and (max-width: 600px) {
+    div.landingCardWrapper {
+        height: 80vh;
+        width: 90vw;
+    }
+  }
