@@ -11,6 +11,7 @@ function App() {
   const [formData, setFormData] = useState();
   const [dataGotten, setDataGotten] = useState(false);
   const [thingSpeakData, setThingSpeakData] = useState();
+  const reset = () => {setFormSubmitted(false); setDataGotten(false);}
 
   const callAPI = () => {
     if (formSubmitted && !dataGotten) {
@@ -35,7 +36,7 @@ function App() {
     <div className="App">
       {!formSubmitted && <LandingScreen setFormSubmitted = {setFormSubmitted} setFormData = {setFormData} />}
       {formSubmitted && !dataGotten && <LoadingScreen />}
-      {formSubmitted && dataGotten && <DataDisplay data={thingSpeakData} formData={formData} />}
+      {formSubmitted && dataGotten && <DataDisplay data={thingSpeakData} formData={formData} reset={reset}/>}
     </div>
   );
 }

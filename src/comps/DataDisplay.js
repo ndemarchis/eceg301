@@ -1,9 +1,11 @@
 
 // array of all pressed indecies
 
-import { ResponsiveSwarmPlot } from '@nivo/swarmplot'
+import { Button } from '@material-ui/core'
 import { useEffect } from 'react-dom'
 import * as d3 from "d3";
+import EditorFormatListBulleted from 'material-ui/svg-icons/editor/format-list-bulleted';
+import { MyResponsiveSwarmPlot } from './MyResponsiveSwarmPlot';
 
 let formattedData = [];
 
@@ -16,12 +18,15 @@ const DataDisplay = (props) => {
 
     return (
         <div style={{ color: "white" }}>
-            data display!
-            <br />
-            {startUnix.toString()}
-            <br />
-            {endUnix.toString()}
-            <br />
+            <div style={{paddingLeft: "10vw"}}>
+                <Button
+                    onClick={() => { props.reset() }}
+                    variant="contained" 
+                    color="secondary"
+                >
+                    🠔 Go back
+                </Button>
+            </div>
             {MyResponsiveSwarmPlot(formattedData, startUnix, endUnix, 6)}
         </div>
     )
@@ -67,70 +72,9 @@ const xLabels = (a, b, n) => {
     let newArr = [];
     for (i = 0; i < ret.length; i++) {
         let temp = new Date(ret[i]);
-        newArr[i] = `${temp.getHours()}:${temp.getMinutes()}`
+        newArr[i] = `${temp.getHours()}:${temp.getMinutes().toString().padStart(2, "0")}`
+        console.log(newArr[i])
     }
     console.log(newArr);
     return newArr;
 }
-
-const MyResponsiveSwarmPlot = (data, start, end, cols) => (
-    <ResponsiveSwarmPlot
-        style={{ height: "60vh" }}
-        data={data}
-        groups={['1', '2', '3', '4']}
-        value={'time'}
-        valueScale={{ type: 'linear', min: start, max: end, reverse: false }}
-        size={{ key: 'volume', values: [4, 20], sizes: [cols, 20] }}
-        forceStrength={4}
-        layout="horizontal"
-        simulationIterations={100}
-        gridXValues={() => {xLabels(start, end, cols)}}
-        gridYValues={["✔️", "❓", "😀", "☹️"]}
-        borderColor={{
-            from: 'color',
-            modifiers: [
-                [
-                    'darker',
-                    0.6
-                ],
-                [
-                    'opacity',
-                    0.5
-                ]
-            ]
-        }}
-        margin={{ top: 80, right: 100, bottom: 80, left: 100 }}
-        axisTop={{
-            orient: 'top',
-            tickSize: 10,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'time throughout the lesson',
-            legendPosition: 'middle',
-            legendOffset: -46
-        }}
-        axisRight={{
-            orient: 'right',
-            tickSize: 10,
-            tickPadding: 5,
-            tickRotation: 0,
-        }}
-        axisBottom={{
-            orient: 'bottom',
-            tickSize: 10,
-            tickPadding: 5,
-            tickRotation: 0,
-        }}
-        axisLeft={{
-            orient: 'left',
-            tickSize: 10,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'reaction button clicked',
-            legendPosition: 'middle',
-            legendOffset: -76
-        }}
-        motionStiffness={50}
-        motionDamping={10}
-    />
-)

@@ -14,7 +14,8 @@ div.landingCardWrapper {
 }
 
 svg {
-    max-height: 70vh;
+    height: 85vh;
+    max-height: 85vh;
 }
 
 svg > g > g > g > text {
