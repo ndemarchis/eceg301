@@ -45,6 +45,7 @@ function parseData(props, startUnix, endUnix) {
             newObj.volume = 4;
             newObj.group = parseInt(oldObj.field2);
             newObj.time = created.getTime();
+            newObj.ISOtime = created.toISOString();
             newObj.id = oldObj.entry_id.toString();
             newObj.clicker = parseInt(oldObj.field1);
             arr.push(newObj);
