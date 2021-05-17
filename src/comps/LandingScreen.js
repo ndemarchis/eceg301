@@ -5,6 +5,15 @@ import { DateTimePicker, LocalizationProvider } from "@material-ui/pickers";
 
 // https://dev.to/pnkfluffy/passing-data-from-child-to-parent-with-react-hooks-1ji3
 
+const email = (name, email) => {
+  let mailto = `mailto:${email}@bucknell.edu`;
+  return(
+    <a href={mailto}>
+      {name}
+    </a>
+  )
+}
+
 const LandingScreen = (props) => {
 
     const [selectedDate, handleDateChange] = React.useState(new Date());
@@ -23,13 +32,14 @@ const LandingScreen = (props) => {
             }}>
               <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-                Sample Title
+                ECEG 301 Clicker Project
               </Typography>
                 <LocalizationProvider dateAdapter={DateFnsUtils} >
                     <DateTimePicker
                         renderInput={(props) => <TextField {...props} style={{width: "100%"}} />}
                         value={selectedDate}
                         onChange={(date) => handleDateChange(date)}
+                        disableFuture = {true}
                     />
                 </LocalizationProvider>
               <Select
@@ -51,6 +61,9 @@ const LandingScreen = (props) => {
                   Class Duration
                 </InputLabel>
               <br />
+              <Typography gutterBottom variant="p" component="p"><i>
+                by {email("Luka Baramidze", "lb037")}, {email("Nick DeMarchis","ned004")}, {email("Joyy Wan","xw003")}</i>
+              </Typography>
               </CardContent>
               <CardActions>
               <Button 

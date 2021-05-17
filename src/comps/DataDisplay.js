@@ -28,6 +28,7 @@ const DataDisplay = (props) => {
                 </Button>
             </div>
             {MyResponsiveSwarmPlot(formattedData, startUnix, endUnix, 6)}
+            {console.log(formattedData)}
         </div>
     )
 }
@@ -42,8 +43,10 @@ function parseData(props, startUnix, endUnix) {
         if ((startUnix <= created) && (endUnix >= created)) {
             let newObj = {}
             let oldObj = props.data.feeds[i];
+            let group = parseInt(oldObj.field2)
             newObj.volume = 4;
-            newObj.group = parseInt(oldObj.field2);
+            newObj.group = (((group > 0) && (group <= 4)) ? group : null);
+            if (newObj.group == null) { continue }
             newObj.time = created.getTime();
             newObj.ISOtime = created.toISOString();
             newObj.id = oldObj.entry_id.toString();
